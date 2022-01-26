@@ -1,4 +1,8 @@
 import math
+from turtle import screensize
+from pandas import ExcelFile
+
+from sqlalchemy import true
 
 #Comprimentos
 d1 = 400
@@ -6,14 +10,14 @@ d2 = 1000
 d3 = d2
 d4 = 500
 
-c1 = 2000
-c2 = 1500
+c1 = 1000
+c2 = 1200
 c3 = c2
-c4 = 500
+c4 = 300
 
-L1 = 5000
-L2 = 20000
-L3 = 5000
+L1 = 2000
+L2 = 5000
+L3 = 2000
 
 #Ângulos
 alfa = math.atan(abs(d2 - d1) / (2 * L1))
@@ -24,9 +28,9 @@ delta = math.atan(abs(c3 - c4) / (2 * L3))
 L = L1 + L2 + L3
 
 #Número de subdivisões
-n_pe = 5
-n_in = 20
-n_po = 5
+n_pe = 3
+n_in = 5
+n_po = 3
 
 #Passos
 p_pe = L1 / n_pe
@@ -111,3 +115,10 @@ for i in range(len(xf)):
     s += str(xf[i]) + ',' + str(yf[i]) + ',' + str(zf[i]) + '\n'
 f.write(s)
 f.close()
+
+
+
+#Gera script do Salome Meca
+
+if (true):
+    exec(open('gera_script_salome.py').read())
