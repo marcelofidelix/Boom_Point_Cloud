@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-
+import pdb
 p1 = '''
 #!/usr/bin/env python
 ###
@@ -48,6 +48,11 @@ f.close()
 
 l = s.split('\n')
 l = [el for el in l if el != '']
+
+#Elimina duplicidades nos pontos
+l = list(dict.fromkeys(l))
+
+#pdb.set_trace()
 
 for i in range(len(l)):
 	p2 += 'Vertex_'+str(i)+' = geompy.MakeVertex('+l[i].replace(' ', ',')+')'+'\n'
