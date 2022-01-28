@@ -6,18 +6,18 @@ from sqlalchemy import true
 
 #Comprimentos
 d1 = 400
-d2 = 1000
+d2 = 2000
 d3 = d2
 d4 = 500
 
-c1 = 1000
-c2 = 1200
+c1 = 4000
+c2 = 3000
 c3 = c2
-c4 = 300
+c4 = 500
 
-L1 = 2000
-L2 = 5000
-L3 = 2000
+L1 = 10000
+L2 = 20000
+L3 = 10000
 
 #Ângulos
 alfa = math.atan(abs(d2 - d1) / (2 * L1))
@@ -28,9 +28,9 @@ delta = math.atan(abs(c3 - c4) / (2 * L3))
 L = L1 + L2 + L3
 
 #Número de subdivisões
-n_pe = 3
-n_in = 5
-n_po = 3
+n_pe = 7
+n_in = 14
+n_po = 7
 
 #Passos
 p_pe = L1 / n_pe
