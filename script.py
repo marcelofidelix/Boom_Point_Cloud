@@ -4,23 +4,29 @@ from pandas import ExcelFile
 
 from sqlalchemy import true
 
+liebherr_mtc_3100 = 1
+
 #Comprimentos
-d1 = 400
-d2 = 2000
+d1 = 0.447 * 1000
+d2 = 2.3 * 1000
 d3 = d2
-d4 = 500
+d4 = 1.2 * 1000
 
-c1 = 4000
-c2 = 3000
+c1 = 4.18 * 1000
+c2 = 3.2 * 1000
 c3 = c2
-c4 = 500
+c4 = 2.2 * 1000
 
-L1 = 10000
-L2 = 20000
-L3 = 10000
+L1 = 13.285 * 1000
+L2 = 27 * 1000
+L3 = 9.035 * 1000
 
 #Ângulos
 alfa = math.atan(abs(d2 - d1) / (2 * L1))
+
+if liebherr_mtc_3100 == 1:
+    alfa = 0.23904
+
 beta = math.atan(abs(c1 - c2) / (2 * L1))
 gama = math.atan(abs(d3 - d4) / (2 * L3))
 delta = math.atan(abs(c3 - c4) / (2 * L3))
@@ -28,8 +34,8 @@ delta = math.atan(abs(c3 - c4) / (2 * L3))
 L = L1 + L2 + L3
 
 #Número de subdivisões
-n_pe = 7
-n_in = 14
+n_pe = 10
+n_in = 8*3
 n_po = 7
 
 #Passos
@@ -47,7 +53,14 @@ z = []
 ##########
 for i in range(n_pe + 1):
     x.append(i * p_pe)
-    y.append(d1 / 2 + x[i] * math.sin(alfa))
+    if liebherr_mtc_3100 == 0:
+        y.append(d1 / 2 + x[i] * math.sin(alfa))
+    if liebherr_mtc_3100 == 1:
+        if (d1 / 2 + x[i] * math.sin(alfa)) > d2 / 2:
+            y.append(d2 / 2)
+        else:
+            y.append(d1 / 2 + x[i] * math.sin(alfa))
+
     z.append(c1 / 2 - x[i] * math.sin(beta))
     
 #Força os últimos valores de y e z para serem iguais a c2/2 e c2/2
