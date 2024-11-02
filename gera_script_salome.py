@@ -94,9 +94,21 @@ inferior = pd.concat([df_ie, df_id]).sort_index()
 
 #pdb.set_trace()
 
+
+
+'''
+String para o gmsh
+'''
+gmsh = ''
+pgmsh = 0
+lgmsh = 0
+
 for i in range(len(l)):
 	s = df.iloc[i]['cordaid']
 	p2 += s+' = geompy.MakeVertex('+df.iloc[i]['coord_str']+')'+'\n'
+	#gmsh
+	gmsh += 'Point(' + str(pgmsh) + ') = {' + df.iloc[i]['coord_str']+'};'+'\n'
+	pgmsh += 1
 
 for i in range(len(l)):
 	s = df.iloc[i]['cordaid']
@@ -111,8 +123,14 @@ for i in range(len(df_id_)):
 	try:
 		p5 += 'Lineid_' + str(i) + ' = geompy.MakeLineTwoPnt('+ df_id_.iloc[i]['cordaid'] + ',' + df_id_.iloc[i+1]['cordaid'] + ")" + '\n'
 		p5 += 'geompy.addToStudy('+ ' Lineid_' + str(i) + ', "' + ' Lineid_' + str(i) + '")' + '\n'
+		#gmsh
+		gmsh += 'Line(' + str(lgmsh) + ') = {' + df_id_.iloc[i]['cordaid'] + ',' + df_id_.iloc[i+1]['cordaid'] + '};\n'
+		lgmsh += 1
+	
 	except:
 		continue
+
+breakpoint()
 for i in range(len(df_sd_)):
 	try:
 		p5 += 'Linesd_' + str(i) + ' = geompy.MakeLineTwoPnt('+ df_sd_.iloc[i]['cordaid'] + ',' + df_sd_.iloc[i+1]['cordaid'] + ")" + '\n'
